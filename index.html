@@ -5,88 +5,284 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>나현지 포트폴리오</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
 <style>
+/* ── 토큰 ───────────────────────────────────────────── */
 :root{
-  --bg:#EEF1F6; --ink:#1B2433; --muted:#5B6678; --line:#C9D1DE;
-  --accent:#2B4FD8; --mark:#FFE98A; --card:#F9FAFC;
+  --bg:#0E1117;
+  --surface:#161B26;
+  --surface2:#1E2637;
+  --border:#2A3347;
+  --ink:#E8ECF4;
+  --muted:#7A8AA8;
+  --accent:#5B8DEF;
+  --accent2:#A78BFA;
+  --grad-start:#5B8DEF;
+  --grad-end:#A78BFA;
+  --mark:#FFE98A;
+  --radius:14px;
+  --shadow:0 4px 24px rgba(0,0,0,.45);
 }
-*{box-sizing:border-box}
+*{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.75 "Noto Sans KR",sans-serif}
-a{color:var(--accent)}
-a:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
-.wrap{max-width:1040px;margin:0 auto;padding:0 24px;display:grid;grid-template-columns:260px 1fr;gap:64px}
-aside{position:sticky;top:0;align-self:start;padding:72px 0}
-h1{font:700 40px/1.2 "Noto Sans KR",sans-serif;margin:0 0 12px;letter-spacing:-.03em}
-.role{margin:0 0 32px;color:var(--muted)}
-nav a{display:block;padding:6px 0;color:var(--ink);text-decoration:none;border-left:3px solid transparent;padding-left:12px}
-nav a:hover{border-color:var(--accent);color:var(--accent)}
-main{padding:72px 0 96px}
-section{margin-bottom:72px}
-h2{font:700 26px/1.3 "Gowun Batang",serif;margin:0 0 20px;padding-bottom:10px;border-bottom:1px solid var(--line)}
-.hero{font:400 26px/1.6 "Gowun Batang",serif;margin:0 0 72px}
-.hero mark{background:linear-gradient(transparent 55%,var(--mark) 55%);color:inherit}
-.info{display:grid;grid-template-columns:80px 1fr;gap:6px 16px;margin:24px 0 0;padding:18px 22px;background:var(--card);border:1px solid var(--line);border-radius:6px}
-.info dt{color:var(--muted);font-size:14px}
-.info dd{margin:0;font-weight:500}
-.project{background:var(--card);border:1px solid var(--line);border-radius:6px;padding:22px 24px;margin-bottom:16px}
-.project h3{margin:0 0 4px;font-size:18px}
-.project .meta{color:var(--muted);font-size:14px;margin:0 0 10px}
-.project p{margin:0}
-.tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;padding:0;list-style:none}
-.tags li{font-size:13px;padding:2px 10px;border:1px solid var(--line);border-radius:99px;color:var(--muted)}
-@media(max-width:760px){
-  .wrap{grid-template-columns:1fr;gap:0}
-  aside{position:static;padding:48px 0 0}
-  nav{display:flex;gap:16px;flex-wrap:wrap}
-  nav a{border:0;padding:0}
-  main{padding-top:40px}
+body{background:var(--bg);color:var(--ink);font:400 16px/1.75 "Noto Sans KR",sans-serif;min-height:100vh}
+a{color:var(--accent);text-decoration:none}
+a:hover{color:var(--accent2)}
+a:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:3px}
+
+/* ── 히어로 배너 ─────────────────────────────────────── */
+.hero-banner{
+  background:linear-gradient(135deg,#0f1923 0%,#1a1040 50%,#0a1628 100%);
+  padding:80px 40px 60px;
+  text-align:center;
+  position:relative;
+  overflow:hidden;
 }
-@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+.hero-banner::before{
+  content:'';
+  position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 60% 80% at 20% 50%,rgba(91,141,239,.15) 0%,transparent 70%),
+    radial-gradient(ellipse 50% 70% at 80% 40%,rgba(167,139,250,.12) 0%,transparent 70%);
+  pointer-events:none;
+}
+.avatar{
+  width:96px;height:96px;border-radius:50%;
+  background:linear-gradient(135deg,var(--grad-start),var(--grad-end));
+  display:flex;align-items:center;justify-content:center;
+  font:700 36px/1 "Noto Sans KR",sans-serif;
+  color:#fff;margin:0 auto 20px;
+  box-shadow:0 0 0 4px rgba(91,141,239,.25),var(--shadow);
+  position:relative;z-index:1;
+}
+.hero-name{
+  font:700 48px/1.15 "Noto Sans KR",sans-serif;
+  letter-spacing:-.04em;
+  background:linear-gradient(90deg,var(--grad-start),var(--accent2));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  margin-bottom:10px;position:relative;z-index:1;
+}
+.hero-role{
+  color:var(--muted);font-size:17px;font-weight:300;
+  margin-bottom:28px;position:relative;z-index:1;
+  letter-spacing:.02em;
+}
+.hero-nav{
+  display:flex;justify-content:center;gap:12px;flex-wrap:wrap;
+  position:relative;z-index:1;
+}
+.hero-nav a{
+  padding:8px 22px;border-radius:99px;
+  border:1px solid var(--border);
+  background:rgba(255,255,255,.04);
+  color:var(--ink);font-size:14px;font-weight:500;
+  transition:background .2s,border-color .2s,color .2s;
+  backdrop-filter:blur(6px);
+}
+.hero-nav a:hover{
+  background:rgba(91,141,239,.18);
+  border-color:var(--accent);
+  color:var(--accent);
+}
+
+/* ── 레이아웃 ────────────────────────────────────────── */
+.wrap{max-width:800px;margin:0 auto;padding:56px 24px 96px}
+section{margin-bottom:64px}
+
+/* ── 섹션 헤더 ────────────────────────────────────────── */
+.section-head{
+  display:flex;align-items:center;gap:12px;
+  margin-bottom:28px;
+}
+.section-icon{
+  width:36px;height:36px;border-radius:10px;
+  background:linear-gradient(135deg,var(--grad-start),var(--grad-end));
+  display:flex;align-items:center;justify-content:center;
+  font-size:16px;flex-shrink:0;
+}
+h2{font:700 22px/1.3 "Gowun Batang",serif;letter-spacing:-.01em}
+
+/* ── 소개 카드 ────────────────────────────────────────── */
+.about-card{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  padding:28px 32px;
+  box-shadow:var(--shadow);
+}
+.about-card p{color:#BDC8DC;line-height:1.8;margin-bottom:24px}
+.info-grid{
+  display:grid;grid-template-columns:repeat(2,1fr);gap:16px;
+}
+.info-item{
+  background:var(--surface2);
+  border:1px solid var(--border);
+  border-radius:10px;
+  padding:14px 18px;
+}
+.info-item .label{font-size:12px;color:var(--muted);font-weight:500;letter-spacing:.06em;text-transform:uppercase;margin-bottom:4px}
+.info-item .value{font-size:15px;font-weight:500;color:var(--ink)}
+
+/* ── 프로젝트 카드 ───────────────────────────────────── */
+.project{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  padding:24px 28px;
+  margin-bottom:16px;
+  box-shadow:var(--shadow);
+  transition:transform .25s,border-color .25s,box-shadow .25s;
+  position:relative;
+  overflow:hidden;
+}
+.project::before{
+  content:'';
+  position:absolute;top:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,var(--grad-start),var(--grad-end));
+  opacity:0;transition:opacity .25s;
+}
+.project:hover{
+  transform:translateY(-4px);
+  border-color:rgba(91,141,239,.4);
+  box-shadow:0 8px 32px rgba(0,0,0,.6),0 0 0 1px rgba(91,141,239,.15);
+}
+.project:hover::before{opacity:1}
+.project-top{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:6px}
+.project h3{font:700 18px/1.3 "Noto Sans KR",sans-serif;color:var(--ink)}
+.status{
+  font-size:12px;font-weight:500;padding:3px 10px;border-radius:99px;
+  background:rgba(91,141,239,.15);border:1px solid rgba(91,141,239,.3);
+  color:var(--accent);white-space:nowrap;flex-shrink:0;
+}
+.project .meta{color:var(--muted);font-size:14px;margin-bottom:12px}
+.project p{color:#BDC8DC;font-size:15px;line-height:1.7}
+.tags{display:flex;flex-wrap:wrap;gap:7px;margin-top:16px;list-style:none}
+.tags li{
+  font-size:12px;font-weight:500;padding:3px 11px;
+  border:1px solid var(--border);border-radius:99px;
+  color:var(--muted);
+  background:var(--surface2);
+  transition:border-color .2s,color .2s;
+}
+.project:hover .tags li{border-color:rgba(91,141,239,.3);color:var(--accent)}
+
+/* ── 포부 ────────────────────────────────────────────── */
+.goal-card{
+  background:linear-gradient(135deg,rgba(91,141,239,.08),rgba(167,139,250,.08));
+  border:1px solid rgba(91,141,239,.2);
+  border-radius:var(--radius);
+  padding:28px 32px;
+  box-shadow:var(--shadow);
+}
+.goal-card p{color:#BDC8DC;line-height:1.9;font-size:16px}
+.goal-card p + p{margin-top:14px}
+.goal-card mark{
+  background:linear-gradient(transparent 55%,rgba(255,233,138,.3) 55%);
+  color:inherit;
+}
+
+/* ── 푸터 ────────────────────────────────────────────── */
+footer{
+  text-align:center;padding:28px;
+  color:var(--muted);font-size:13px;
+  border-top:1px solid var(--border);
+}
+
+/* ── 반응형 ─────────────────────────────────────────── */
+@media(max-width:600px){
+  .hero-banner{padding:56px 24px 44px}
+  .hero-name{font-size:36px}
+  .info-grid{grid-template-columns:1fr}
+  .wrap{padding:40px 16px 72px}
+}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .project{transition:none}
+}
 </style>
 </head>
 <body>
+
+<!-- 히어로 배너 -->
+<header class="hero-banner">
+  <div class="avatar">현</div>
+  <h1 class="hero-name">나현지</h1>
+  <p class="hero-role">국민대학교 경영정보학부 · 20262073</p>
+  <nav class="hero-nav" aria-label="섹션 이동">
+    <a href="#about">소개</a>
+    <a href="#projects">활동</a>
+    <a href="#goal">포부</a>
+  </nav>
+</header>
+
 <div class="wrap">
-  <aside>
-    <h1>나현지</h1>
-    <p class="role">국민대학교 경영정보학부</p>
-    <nav aria-label="섹션 이동">
-      <a href="#about">소개</a>
-      <a href="#projects">활동</a>
-      <a href="#goal">포부</a>
-    </nav>
-  </aside>
 
-  <main>
-
-    <section id="about">
+  <!-- 소개 -->
+  <section id="about">
+    <div class="section-head">
+      <div class="section-icon">👤</div>
       <h2>소개</h2>
-      <p>국민대학교 경영정보학부에서 경영과 정보기술을 함께 배우고 있습니다. 배운 것과 직접 해 본 일을 한곳에 모아 정리하기 위해 이 포트폴리오를 만들었습니다.</p>
-      <dl class="info">
-        <dt>이름</dt><dd>나현지</dd>
-        <dt>소속</dt><dd>국민대학교 경영정보학부</dd>
-        <dt>학번</dt><dd>20262073</dd>
-        <dt>이메일</dt><dd><a href="mailto:hyunji142@kookmin.ac.kr">hyunji142@kookmin.ac.kr</a></dd>
-      </dl>
-    </section>
+    </div>
+    <div class="about-card">
+      <p>국민대학교 경영정보학부에서 경영과 IT를 함께 학습하고 있는 나현지입니다. 두 분야가 조직과 사회의 문제를 해결하는 데 어떻게 결합되는지 탐구하고자 경영정보학부에 진학했으며, 이를 학업과 실습을 통해 구체화해 가고 있습니다.</p>
+      <p>이 포트폴리오는 학습 내용과 직접 수행한 활동을 체계적으로 기록하고 정리하기 위해 HTML로 직접 제작하여 GitHub Pages로 공개했습니다. 최근에는 Kiro와 Notion을 활용하여 프로젝트의 목표, 진행 상황, 의사결정의 근거를 문서화하고, 이를 바탕으로 작업을 이어가는 방식을 실습하고 있습니다.</p>
+      <p>결과물뿐 아니라 과정과 판단의 근거를 함께 남기는 것을 중요하게 생각하며, 학기마다 활동을 축적해 성장 과정을 보여 드리고자 합니다.</p>
+      <div class="info-grid">
+        <div class="info-item">
+          <div class="label">이름</div>
+          <div class="value">나현지</div>
+        </div>
+        <div class="info-item">
+          <div class="label">소속</div>
+          <div class="value">경영정보학부</div>
+        </div>
+        <div class="info-item">
+          <div class="label">학번</div>
+          <div class="value">20262073</div>
+        </div>
+        <div class="info-item">
+          <div class="label">이메일</div>
+          <div class="value"><a href="mailto:hyunji142@kookmin.ac.kr">hyunji142@kookmin.ac.kr</a></div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    <section id="projects">
+  <!-- 활동 -->
+  <section id="projects">
+    <div class="section-head">
+      <div class="section-icon">🚀</div>
       <h2>활동</h2>
-      <article class="project">
-        <h3>개인 포트폴리오 웹페이지 제작</h3>
-        <p class="meta">개인 프로젝트 · 진행 중</p>
-        <p>지금까지의 활동을 정리하기 위해 HTML로 포트폴리오 웹페이지를 만들고 있습니다. 직접 만들면서 웹페이지의 구성 방식을 익히고 있고, 앞으로 하는 활동을 이 페이지에 계속 추가해 갈 계획입니다.</p>
-        <ul class="tags"><li>HTML</li><li>포트폴리오</li></ul>
-      </article>
-    </section>
+    </div>
 
-    <section id="goal">
+    <article class="project">
+      <div class="project-top">
+        <h3>개인 포트폴리오 웹페이지 제작</h3>
+        <span class="status">진행 중</span>
+      </div>
+      <p class="meta">개인 프로젝트</p>
+      <p>지금까지의 활동을 정리하기 위해 HTML로 포트폴리오 웹페이지를 만들고 있습니다. 직접 만들면서 웹페이지의 구성 방식을 익히고 있고, 앞으로 하는 활동을 이 페이지에 계속 추가해 갈 계획입니다.</p>
+      <ul class="tags"><li>HTML</li><li>CSS</li><li>포트폴리오</li><li>GitHub Pages</li></ul>
+    </article>
+  </section>
+
+  <!-- 포부 -->
+  <section id="goal">
+    <div class="section-head">
+      <div class="section-icon">✨</div>
       <h2>포부</h2>
-      <p>경영과 정보기술을 함께 공부하는 만큼, 두 분야를 연결해 실제 문제를 해결할 수 있는 사람이 되고 싶습니다.</p>
-      <p>배운 내용을 꾸준히 기록하고 정리하는 습관을 길러, 이 포트폴리오를 학기마다 채워 가며 성장 과정을 보여 주려고 합니다.</p>
-    </section>
-  </main>
+    </div>
+    <div class="goal-card">
+      <p>경영과 정보기술을 함께 공부하는 만큼, <mark>두 분야를 연결해 실제 문제를 해결할 수 있는 사람</mark>이 되고 싶습니다.</p>
+      <p>배운 내용을 꾸준히 기록하고 정리하는 습관을 길러, 이 포트폴리오를 학기마다 채워 가며 <mark>성장 과정을 보여 주려고</mark> 합니다.</p>
+    </div>
+  </section>
+
 </div>
+
+<footer>
+  © 2026 나현지 · <a href="mailto:hyunji142@kookmin.ac.kr">hyunji142@kookmin.ac.kr</a>
+</footer>
+
 </body>
 </html>
