@@ -1,0 +1,14 @@
+# Netlify 배포 설정
+# 빌드 시 공개할 파일만 public/ 에 복사한 뒤 배포
+# index.html 원본은 루트에 유지 → GitHub Pages도 그대로 동작
+
+[build]
+  command = "node -e \"const fs=require('fs');fs.mkdirSync('public',{recursive:true});fs.copyFileSync('index.html','public/index.html');\""
+  publish = "public"
+  functions = "netlify/functions"
+
+# /api/* 요청을 Netlify Functions로 연결
+[[redirects]]
+  from = "/api/*"
+  to = "/.netlify/functions/:splat"
+  status = 200

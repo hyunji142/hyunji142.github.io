@@ -1,0 +1,19 @@
+# 의존성
+node_modules/
+
+# 빌드 출력 (Netlify 배포용 — 루트 원본과 중복이므로 커밋 불필요)
+public/
+
+# IDE 설정 및 개인 기록 (GitHub에 올리지 않음)
+.kiro/
+
+# 환경 변수 (비밀 키 — 절대 커밋 금지)
+.env
+.env.*
+!.env.example
+
+# Netlify 로컬 실행 임시 파일
+.netlify/
+
+# macOS
+.DS_Store

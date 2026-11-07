@@ -1,0 +1,12 @@
+{
+  "name": "hyunji142-homepage",
+  "version": "1.0.0",
+  "private": true,
+  "description": "나현지 포트폴리오 홈페이지 — Netlify Functions 의존성 관리용",
+  "scripts": {
+    "build": "node -e \"const fs=require('fs');fs.mkdirSync('public',{recursive:true});fs.copyFileSync('index.html','public/index.html');\""
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "2.45.4"
+  }
+}
