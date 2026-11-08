@@ -181,6 +181,102 @@ h2{font:700 22px/1.3 "Gowun Batang",serif;letter-spacing:-.01em}
   color:inherit;
 }
 
+/* ── 방명록 ──────────────────────────────────────────── */
+.guestbook-form{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  padding:24px 28px;
+  margin-bottom:24px;
+  box-shadow:var(--shadow);
+}
+.guestbook-form label{
+  display:block;font-size:13px;font-weight:500;
+  color:var(--muted);letter-spacing:.04em;text-transform:uppercase;
+  margin-bottom:6px;
+}
+.guestbook-form input,
+.guestbook-form textarea{
+  width:100%;
+  background:var(--surface2);
+  border:1px solid var(--border);
+  border-radius:8px;
+  color:var(--ink);
+  font:400 15px/1.6 "Noto Sans KR",sans-serif;
+  padding:10px 14px;
+  outline:none;
+  transition:border-color .2s;
+  resize:none;
+}
+.guestbook-form input:focus,
+.guestbook-form textarea:focus{
+  border-color:var(--accent);
+}
+.guestbook-form input.invalid,
+.guestbook-form textarea.invalid{
+  border-color:#f87171;
+}
+.guestbook-form .field{margin-bottom:14px}
+.guestbook-form .counter{
+  font-size:12px;color:var(--muted);
+  text-align:right;margin-top:4px;
+}
+.guestbook-form .field-error{
+  font-size:13px;color:#f87171;margin-top:4px;
+  min-height:18px;
+}
+.guestbook-form .submit-row{
+  display:flex;align-items:center;gap:12px;flex-wrap:wrap;
+  margin-top:4px;
+}
+.btn-submit{
+  padding:9px 24px;border-radius:99px;border:none;cursor:pointer;
+  background:linear-gradient(90deg,var(--grad-start),var(--grad-end));
+  color:#fff;font:500 14px/1 "Noto Sans KR",sans-serif;
+  transition:opacity .2s;
+}
+.btn-submit:disabled{opacity:.45;cursor:not-allowed}
+.form-status{font-size:13px;min-height:18px}
+.form-status.error{color:#f87171}
+.form-status.success{color:#4ade80}
+
+.guestbook-list-head{
+  display:flex;align-items:center;justify-content:space-between;
+  margin-bottom:16px;
+}
+.guestbook-list-head .hint{
+  font-size:12px;color:var(--muted);
+}
+.guestbook-empty,.guestbook-error{
+  text-align:center;color:var(--muted);
+  font-size:14px;padding:32px 0;
+}
+.msg-card{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  padding:18px 22px;
+  margin-bottom:12px;
+  box-shadow:var(--shadow);
+}
+.msg-card-top{
+  display:flex;align-items:baseline;
+  justify-content:space-between;gap:8px;
+  margin-bottom:6px;
+}
+.msg-card .nickname{
+  font:600 15px/1 "Noto Sans KR",sans-serif;
+  color:var(--accent);
+  word-break:break-all;
+}
+.msg-card .time{
+  font-size:12px;color:var(--muted);white-space:nowrap;flex-shrink:0;
+}
+.msg-card .body{
+  font-size:14px;color:#BDC8DC;line-height:1.7;
+  word-break:break-all;
+}
+
 /* ── 푸터 ────────────────────────────────────────────── */
 footer{
   text-align:center;padding:28px;
@@ -212,6 +308,7 @@ footer{
     <a href="#about">소개</a>
     <a href="#projects">활동</a>
     <a href="#goal">포부</a>
+    <a href="#guestbook">방명록</a>
   </nav>
 </header>
 
@@ -278,11 +375,257 @@ footer{
     </div>
   </section>
 
+  <!-- 방명록 -->
+  <section id="guestbook">
+    <div class="section-head">
+      <div class="section-icon">💌</div>
+      <h2>방명록</h2>
+    </div>
+
+    <!-- 입력 폼 -->
+    <div class="guestbook-form">
+      <div class="field">
+        <label for="gb-nickname">별명</label>
+        <input
+          type="text"
+          id="gb-nickname"
+          placeholder="별명 (2~12자)"
+          maxlength="12"
+          autocomplete="off"
+        >
+        <p class="field-error" id="gb-nickname-error" aria-live="polite"></p>
+      </div>
+      <div class="field">
+        <label for="gb-message">메시지</label>
+        <textarea
+          id="gb-message"
+          placeholder="한 줄 응원 메시지 (1~100자)"
+          maxlength="100"
+          rows="3"
+        ></textarea>
+        <p class="counter" id="gb-counter" aria-live="polite">0 / 100</p>
+        <p class="field-error" id="gb-message-error" aria-live="polite"></p>
+      </div>
+      <div class="submit-row">
+        <button class="btn-submit" id="gb-submit" disabled>남기기</button>
+        <p class="form-status" id="gb-status" aria-live="polite"></p>
+      </div>
+    </div>
+
+    <!-- 목록 -->
+    <div class="guestbook-list-head">
+      <span class="hint">최근 100건</span>
+    </div>
+    <div id="gb-list">
+      <p class="guestbook-empty">불러오는 중...</p>
+    </div>
+  </section>
+
 </div>
 
 <footer>
   © 2026 나현지 · <a href="mailto:hyunji142@kookmin.ac.kr">hyunji142@kookmin.ac.kr</a>
 </footer>
 
+<script>
+(function () {
+  'use strict';
+
+  /* ── 요소 참조 ──────────────────────────────────────── */
+  const nickInput   = document.getElementById('gb-nickname');
+  const msgInput    = document.getElementById('gb-message');
+  const counter     = document.getElementById('gb-counter');
+  const nickError   = document.getElementById('gb-nickname-error');
+  const msgError    = document.getElementById('gb-message-error');
+  const submitBtn   = document.getElementById('gb-submit');
+  const statusEl    = document.getElementById('gb-status');
+  const listEl      = document.getElementById('gb-list');
+
+  /* ── 유효성 ─────────────────────────────────────────── */
+  function charLen(s) { return [...s].length; }
+
+  function validateNick(v) {
+    const len = charLen(v);
+    if (len < 2) return '별명은 2자 이상이어야 합니다.';
+    if (len > 12) return '별명은 12자 이하여야 합니다.';
+    return '';
+  }
+
+  function validateMsg(v) {
+    const len = charLen(v);
+    if (len < 1) return '메시지를 입력해 주세요.';
+    if (len > 100) return '메시지는 100자 이하여야 합니다.';
+    return '';
+  }
+
+  /* ── 버튼 상태 갱신 ─────────────────────────────────── */
+  function refreshSubmit() {
+    const nickOk = charLen(nickInput.value) >= 2;
+    const msgOk  = charLen(msgInput.value)  >= 1;
+    submitBtn.disabled = !(nickOk && msgOk);
+  }
+
+  /* ── 이벤트: 별명 ───────────────────────────────────── */
+  nickInput.addEventListener('input', function () {
+    const err = validateNick(nickInput.value);
+    nickError.textContent = err;
+    nickInput.classList.toggle('invalid', err !== '');
+    refreshSubmit();
+  });
+
+  /* ── 이벤트: 메시지 + 카운터 ────────────────────────── */
+  msgInput.addEventListener('input', function () {
+    const len = charLen(msgInput.value);
+    counter.textContent = len + ' / 100';
+    const err = validateMsg(msgInput.value);
+    msgError.textContent = err;
+    msgInput.classList.toggle('invalid', err !== '');
+    refreshSubmit();
+  });
+
+  /* ── 카드 DOM 생성 (textContent만 사용) ─────────────── */
+  function createCard(item) {
+    const card   = document.createElement('div');
+    card.className = 'msg-card';
+
+    const top      = document.createElement('div');
+    top.className  = 'msg-card-top';
+
+    const nick     = document.createElement('span');
+    nick.className = 'nickname';
+    nick.textContent = item.nickname;          // ← textContent
+
+    const time     = document.createElement('span');
+    time.className = 'time';
+    time.textContent = formatDate(item.created_at); // ← textContent
+
+    const body     = document.createElement('p');
+    body.className = 'body';
+    body.textContent = item.message;           // ← textContent
+
+    top.appendChild(nick);
+    top.appendChild(time);
+    card.appendChild(top);
+    card.appendChild(body);
+    return card;
+  }
+
+  function formatDate(iso) {
+    if (!iso) return '';
+    const d = new Date(iso);
+    const pad = (n) => String(n).padStart(2, '0');
+    return d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate())
+      + ' ' + pad(d.getHours()) + ':' + pad(d.getMinutes());
+  }
+
+  /* ── 목록 렌더 ──────────────────────────────────────── */
+  function renderList(items) {
+    listEl.textContent = ''; // 기존 내용 제거
+    if (!items || items.length === 0) {
+      const empty = document.createElement('p');
+      empty.className = 'guestbook-empty';
+      empty.textContent = '아직 남겨진 메시지가 없습니다.';
+      listEl.appendChild(empty);
+      return;
+    }
+    items.forEach(function (item) {
+      listEl.appendChild(createCard(item));
+    });
+  }
+
+  function showListError() {
+    listEl.textContent = '';
+    const err = document.createElement('p');
+    err.className = 'guestbook-error';
+    err.textContent = '메시지를 불러오지 못했습니다.';
+    listEl.appendChild(err);
+  }
+
+  /* ── GET: 목록 조회 ─────────────────────────────────── */
+  function loadMessages() {
+    fetch('/api/messages')
+      .then(function (res) {
+        if (!res.ok) throw new Error('server ' + res.status);
+        return res.json();
+      })
+      .then(function (data) {
+        renderList(data);
+      })
+      .catch(function () {
+        showListError();
+      });
+  }
+
+  /* ── POST: 메시지 등록 ──────────────────────────────── */
+  submitBtn.addEventListener('click', function () {
+    // 서버 요청 전 브라우저 재검사
+    const nickErr = validateNick(nickInput.value);
+    const msgErr  = validateMsg(msgInput.value);
+    if (nickErr || msgErr) {
+      nickError.textContent = nickErr;
+      msgError.textContent  = msgErr;
+      return;
+    }
+
+    // 전송 중 상태
+    submitBtn.disabled   = true;
+    submitBtn.textContent = '전송 중...';
+    setStatus('', '');
+
+    fetch('/api/messages', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        nickname: nickInput.value,
+        message:  msgInput.value,
+      }),
+    })
+      .then(function (res) {
+        return res.json().then(function (data) {
+          return { ok: res.ok, status: res.status, data: data };
+        });
+      })
+      .then(function (result) {
+        if (result.status === 201) {
+          // 성공: 입력 초기화 → 목록 맨 위에 카드 삽입
+          nickInput.value   = '';
+          msgInput.value    = '';
+          counter.textContent = '0 / 100';
+          nickError.textContent = '';
+          msgError.textContent  = '';
+          setStatus('success', '메시지가 등록됐습니다.');
+
+          // 목록이 비어있는 상태면 비어있다는 안내 제거
+          const empty = listEl.querySelector('.guestbook-empty');
+          if (empty) listEl.textContent = '';
+
+          listEl.insertBefore(createCard(result.data), listEl.firstChild);
+        } else {
+          // 400 등 서버 반환 오류
+          const msg = (result.data && result.data.error)
+            ? result.data.error
+            : '입력 내용을 다시 확인해 주세요.';
+          setStatus('error', msg);
+        }
+      })
+      .catch(function () {
+        // 네트워크 오류 / 500
+        setStatus('error', '저장에 실패했습니다. 다시 시도해 주세요.');
+      })
+      .finally(function () {
+        submitBtn.textContent = '남기기';
+        refreshSubmit(); // 입력 상태 기준으로 버튼 활성화 복원
+      });
+  });
+
+  function setStatus(type, msg) {
+    statusEl.textContent = msg;
+    statusEl.className   = 'form-status' + (type ? ' ' + type : '');
+  }
+
+  /* ── 초기 로드 ──────────────────────────────────────── */
+  loadMessages();
+}());
+</script>
 </body>
 </html>
