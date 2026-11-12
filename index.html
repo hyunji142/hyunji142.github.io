@@ -166,6 +166,87 @@ h2{font:700 22px/1.3 "Gowun Batang",serif;letter-spacing:-.01em}
 }
 .project:hover .tags li{border-color:rgba(91,141,239,.3);color:var(--accent)}
 
+/* ── 소개 링크 ───────────────────────────────────────── */
+.about-links{margin-top:20px}
+.about-link{
+  display:inline-block;
+  padding:8px 22px;border-radius:99px;
+  border:1px solid var(--border);
+  background:rgba(255,255,255,.04);
+  color:var(--ink);font-size:14px;font-weight:500;
+  transition:background .2s,border-color .2s,color .2s;
+  backdrop-filter:blur(6px);
+}
+.about-link:hover{
+  background:rgba(91,141,239,.18);
+  border-color:var(--accent);
+  color:var(--accent);
+}
+
+/* ── 역량 ────────────────────────────────────────────── */
+.skills-group{margin-bottom:28px}
+.skills-group:last-child{margin-bottom:0}
+.skills-group-label{
+  font-size:12px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--muted);margin-bottom:14px;
+}
+.skills-grid{
+  display:grid;grid-template-columns:repeat(2,1fr);gap:14px;
+}
+.skill-card{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  padding:18px 20px;
+  box-shadow:var(--shadow);
+  transition:transform .25s,border-color .25s,box-shadow .25s;
+  position:relative;overflow:hidden;
+}
+.skill-card::before{
+  content:'';
+  position:absolute;top:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,var(--grad-start),var(--grad-end));
+  opacity:0;transition:opacity .25s;
+}
+.skill-card:hover{
+  transform:translateY(-3px);
+  border-color:rgba(91,141,239,.4);
+  box-shadow:0 8px 28px rgba(0,0,0,.55),0 0 0 1px rgba(91,141,239,.15);
+}
+.skill-card:hover::before{opacity:1}
+.skill-card.growing{
+  border-color:rgba(167,139,250,.25);
+}
+.skill-card.growing::before{
+  background:linear-gradient(90deg,var(--accent2),#c084fc);
+}
+.skill-card.growing:hover{
+  border-color:rgba(167,139,250,.5);
+  box-shadow:0 8px 28px rgba(0,0,0,.55),0 0 0 1px rgba(167,139,250,.15);
+}
+.skill-name{
+  font:700 15px/1.3 "Noto Sans KR",sans-serif;
+  color:var(--ink);margin-bottom:7px;
+  display:flex;align-items:center;gap:8px;
+}
+.skill-badge{
+  font-size:11px;font-weight:500;padding:2px 8px;border-radius:99px;
+  background:rgba(91,141,239,.15);border:1px solid rgba(91,141,239,.3);
+  color:var(--accent);
+}
+.skill-card.growing .skill-badge{
+  background:rgba(167,139,250,.15);border-color:rgba(167,139,250,.3);
+  color:var(--accent2);
+}
+.skill-desc{
+  font-size:13px;color:#BDC8DC;line-height:1.65;
+}
+.skills-grid--3{grid-template-columns:repeat(3,1fr)}
+@media(max-width:600px){
+  .skills-grid{grid-template-columns:1fr}
+  .skills-grid--3{grid-template-columns:1fr}
+}
+
 /* ── 포부 ────────────────────────────────────────────── */
 .goal-card{
   background:linear-gradient(135deg,rgba(91,141,239,.08),rgba(167,139,250,.08));
@@ -307,6 +388,7 @@ footer{
   <nav class="hero-nav" aria-label="섹션 이동">
     <a href="#about">소개</a>
     <a href="#projects">활동</a>
+    <a href="#skills">역량</a>
     <a href="#goal">포부</a>
     <a href="#guestbook">방명록</a>
   </nav>
@@ -342,6 +424,9 @@ footer{
           <div class="value"><a href="mailto:hyunji142@kookmin.ac.kr">hyunji142@kookmin.ac.kr</a></div>
         </div>
       </div>
+      <div class="about-links">
+        <a href="https://github.com/hyunji142" target="_blank" rel="noopener noreferrer" class="about-link">GitHub로 이동</a>
+      </div>
     </div>
   </section>
 
@@ -361,6 +446,54 @@ footer{
       <p>지금까지의 활동을 정리하기 위해 HTML로 포트폴리오 웹페이지를 만들고 있습니다. 직접 만들면서 웹페이지의 구성 방식을 익히고 있고, 앞으로 하는 활동을 이 페이지에 계속 추가해 갈 계획입니다.</p>
       <ul class="tags"><li>HTML</li><li>CSS</li><li>포트폴리오</li><li>GitHub Pages</li></ul>
     </article>
+  </section>
+
+  <!-- 역량 -->
+  <section id="skills">
+    <div class="section-head">
+      <div class="section-icon">💡</div>
+      <h2>역량</h2>
+    </div>
+
+    <div class="skills-group">
+      <p class="skills-group-label">보유 역량</p>
+      <div class="skills-grid">
+        <div class="skill-card">
+          <div class="skill-name">컴퓨터활용능력 <span class="skill-badge">보유</span></div>
+          <p class="skill-desc">컴퓨터활용능력 자격증을 취득했으며, 엑셀로 데이터를 정리하고 함수를 활용해 문서를 작성할 수 있습니다.</p>
+        </div>
+        <div class="skill-card">
+          <div class="skill-name">노션 <span class="skill-badge">보유</span></div>
+          <p class="skill-desc">프로젝트 진행 기록을 허브 페이지로 관리하며, 작업 내용과 다음 할 일을 체계적으로 정리합니다.</p>
+        </div>
+        <div class="skill-card">
+          <div class="skill-name">HTML / CSS <span class="skill-badge">보유</span></div>
+          <p class="skill-desc">개인 홈페이지를 직접 작성하고 GitHub Pages로 배포했습니다.</p>
+        </div>
+        <div class="skill-card">
+          <div class="skill-name">GitHub <span class="skill-badge">보유</span></div>
+          <p class="skill-desc">저장소를 관리하고 홈페이지를 배포·수정하는 과정을 경험했습니다.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="skills-group">
+      <p class="skills-group-label">키워 나갈 역량</p>
+      <div class="skills-grid skills-grid--3">
+        <div class="skill-card growing">
+          <div class="skill-name">자바스크립트 <span class="skill-badge">성장 중</span></div>
+          <p class="skill-desc">사용자 입력에 반응하는 기능(방명록 입력 검증, 버튼 동작 등)을 구현하는 것을 목표로 기초부터 학습하고 있습니다.</p>
+        </div>
+        <div class="skill-card growing">
+          <div class="skill-name">Supabase <span class="skill-badge">성장 중</span></div>
+          <p class="skill-desc">방명록의 데이터 저장과 조회 기능을 직접 구현하며 데이터베이스 연동을 익히고 있습니다.</p>
+        </div>
+        <div class="skill-card growing">
+          <div class="skill-name">데이터 분석 <span class="skill-badge">성장 중</span></div>
+          <p class="skill-desc">ADsP(데이터분석 준전문가) 취득을 목표로 데이터 분석의 기초 개념과 통계를 학습하고 있습니다.</p>
+        </div>
+      </div>
+    </div>
   </section>
 
   <!-- 포부 -->
