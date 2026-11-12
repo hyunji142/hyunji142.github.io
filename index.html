@@ -4,402 +4,401 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>나현지 포트폴리오</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
 <style>
 /* ── 토큰 ───────────────────────────────────────────── */
 :root{
-  --bg:#0E1117;
-  --surface:#161B26;
-  --surface2:#1E2637;
-  --border:#2A3347;
-  --ink:#E8ECF4;
-  --muted:#7A8AA8;
-  --accent:#5B8DEF;
-  --accent2:#A78BFA;
-  --grad-start:#5B8DEF;
-  --grad-end:#A78BFA;
-  --mark:#FFE98A;
-  --radius:14px;
-  --shadow:0 4px 24px rgba(0,0,0,.45);
+  --cream:#F8F4EE;
+  --cream-dark:#EDE6DA;
+  --brown:#4B2E1F;
+  --brown-mid:#7A4E35;
+  --sky:#CFE3F5;
+  --sky-dark:#A8C8E8;
+  --white:#FFFFFF;
+  --border:#D6C9B8;
+  --muted:#7A5C48;
+  --radius:12px;
+  --shadow:0 2px 12px rgba(75,46,31,.10);
 }
+
+/* ── 리셋 ───────────────────────────────────────────── */
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-body{background:var(--bg);color:var(--ink);font:400 16px/1.75 "Noto Sans KR",sans-serif;min-height:100vh}
-a{color:var(--accent);text-decoration:none}
-a:hover{color:var(--accent2)}
-a:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:3px}
+body{
+  background:var(--cream);
+  color:var(--brown);
+  font:400 16px/1.7 "Pretendard",-apple-system,sans-serif;
+  min-height:100vh;
+}
+a{color:var(--brown);text-decoration:none}
+a:hover{color:var(--brown-mid)}
+a:focus-visible{outline:2px solid var(--brown);outline-offset:3px;border-radius:3px}
+h1,h2,h3{font-weight:700;color:var(--brown)}
+h2{font-size:22px;line-height:1.3}
 
-/* ── 히어로 배너 ─────────────────────────────────────── */
-.hero-banner{
-  background:linear-gradient(135deg,#0f1923 0%,#1a1040 50%,#0a1628 100%);
-  padding:80px 40px 60px;
-  text-align:center;
-  position:relative;
-  overflow:hidden;
+/* ── 히어로 ─────────────────────────────────────────── */
+.hero{
+  background:var(--cream);
+  border-bottom:1px solid var(--border);
+  padding:60px 40px 48px;
 }
-.hero-banner::before{
-  content:'';
-  position:absolute;inset:0;
-  background:
-    radial-gradient(ellipse 60% 80% at 20% 50%,rgba(91,141,239,.15) 0%,transparent 70%),
-    radial-gradient(ellipse 50% 70% at 80% 40%,rgba(167,139,250,.12) 0%,transparent 70%);
-  pointer-events:none;
+.hero-inner{
+  max-width:860px;margin:0 auto;
+  display:flex;align-items:center;justify-content:space-between;gap:40px;
 }
-.avatar{
-  width:96px;height:96px;border-radius:50%;
-  background:linear-gradient(135deg,var(--grad-start),var(--grad-end));
-  display:flex;align-items:center;justify-content:center;
-  font:700 36px/1 "Noto Sans KR",sans-serif;
-  color:#fff;margin:0 auto 20px;
-  box-shadow:0 0 0 4px rgba(91,141,239,.25),var(--shadow);
-  position:relative;z-index:1;
-}
+.hero-text{flex:1}
 .hero-name{
-  font:700 48px/1.15 "Noto Sans KR",sans-serif;
-  letter-spacing:-.04em;
-  background:linear-gradient(90deg,var(--grad-start),var(--accent2));
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
-  margin-bottom:10px;position:relative;z-index:1;
+  font-size:52px;font-weight:700;line-height:1.1;
+  color:var(--brown);letter-spacing:-.02em;
+  margin-bottom:12px;
 }
 .hero-role{
-  color:var(--muted);font-size:17px;font-weight:300;
-  margin-bottom:28px;position:relative;z-index:1;
-  letter-spacing:.02em;
+  font-size:17px;color:var(--muted);font-weight:400;
+  margin-bottom:32px;line-height:1.6;
 }
 .hero-nav{
-  display:flex;justify-content:center;gap:12px;flex-wrap:wrap;
-  position:relative;z-index:1;
+  display:flex;align-items:center;gap:10px;flex-wrap:wrap;
 }
-.hero-nav a{
-  padding:8px 22px;border-radius:99px;
+/* 강조 버튼 2개 */
+.hero-nav .btn-primary{
+  padding:10px 24px;border-radius:99px;
+  background:var(--brown);color:var(--cream);
+  font:600 14px/1 "Pretendard",sans-serif;
+  border:none;cursor:pointer;
+  transition:background .2s;
+  display:inline-block;
+}
+.hero-nav .btn-primary:hover{background:var(--brown-mid);color:var(--cream)}
+/* 작은 링크 3개 */
+.hero-nav .btn-ghost{
+  padding:9px 18px;border-radius:99px;
   border:1px solid var(--border);
-  background:rgba(255,255,255,.04);
-  color:var(--ink);font-size:14px;font-weight:500;
-  transition:background .2s,border-color .2s,color .2s;
-  backdrop-filter:blur(6px);
+  background:transparent;
+  color:var(--brown);font:500 13px/1 "Pretendard",sans-serif;
+  transition:border-color .2s,background .2s;
+  display:inline-block;
 }
-.hero-nav a:hover{
-  background:rgba(91,141,239,.18);
-  border-color:var(--accent);
-  color:var(--accent);
+.hero-nav .btn-ghost:hover{border-color:var(--brown);background:var(--cream-dark)}
+
+/* 프로필 아이콘 */
+.hero-avatar{
+  flex-shrink:0;
+  width:120px;height:120px;border-radius:50%;
+  background:var(--sky);
+  display:flex;align-items:center;justify-content:center;
+  font-size:52px;font-weight:700;color:var(--brown);
+  border:3px solid var(--sky-dark);
+  user-select:none;
 }
 
 /* ── 레이아웃 ────────────────────────────────────────── */
-.wrap{max-width:800px;margin:0 auto;padding:56px 24px 96px}
-section{margin-bottom:64px}
+.wrap{max-width:860px;margin:0 auto;padding:64px 24px 96px}
 
-/* ── 섹션 헤더 ────────────────────────────────────────── */
+/* ── 섹션 헤더 ───────────────────────────────────────── */
 .section-head{
-  display:flex;align-items:center;gap:12px;
+  display:flex;align-items:center;gap:10px;
   margin-bottom:28px;
+  border-bottom:2px solid var(--brown);
+  padding-bottom:10px;
 }
-.section-icon{
-  width:36px;height:36px;border-radius:10px;
-  background:linear-gradient(135deg,var(--grad-start),var(--grad-end));
-  display:flex;align-items:center;justify-content:center;
-  font-size:16px;flex-shrink:0;
-}
-h2{font:700 22px/1.3 "Gowun Batang",serif;letter-spacing:-.01em}
+.section-icon{font-size:20px}
+h2{font-size:22px}
 
-/* ── 소개 카드 ────────────────────────────────────────── */
+/* ── 소개 카드 ───────────────────────────────────────── */
 .about-card{
-  background:var(--surface);
+  background:var(--white);
   border:1px solid var(--border);
   border-radius:var(--radius);
   padding:28px 32px;
   box-shadow:var(--shadow);
 }
-.about-card p{color:#BDC8DC;line-height:1.8;margin-bottom:24px}
+.about-card p{
+  color:var(--brown);line-height:1.8;margin-bottom:18px;font-size:15px;
+}
+.about-card p:last-of-type{margin-bottom:24px}
 .info-grid{
-  display:grid;grid-template-columns:repeat(2,1fr);gap:16px;
+  display:grid;grid-template-columns:repeat(2,1fr);gap:12px;
 }
 .info-item{
-  background:var(--surface2);
+  background:var(--cream);
   border:1px solid var(--border);
-  border-radius:10px;
-  padding:14px 18px;
+  border-radius:8px;
+  padding:12px 16px;
 }
-.info-item .label{font-size:12px;color:var(--muted);font-weight:500;letter-spacing:.06em;text-transform:uppercase;margin-bottom:4px}
-.info-item .value{font-size:15px;font-weight:500;color:var(--ink)}
-
-/* ── 프로젝트 카드 ───────────────────────────────────── */
-.project{
-  background:var(--surface);
-  border:1px solid var(--border);
-  border-radius:var(--radius);
-  padding:24px 28px;
-  margin-bottom:16px;
-  box-shadow:var(--shadow);
-  transition:transform .25s,border-color .25s,box-shadow .25s;
-  position:relative;
-  overflow:hidden;
+.info-item .label{
+  font-size:11px;color:var(--muted);font-weight:600;
+  letter-spacing:.07em;text-transform:uppercase;margin-bottom:3px;
 }
-.project::before{
-  content:'';
-  position:absolute;top:0;left:0;right:0;height:3px;
-  background:linear-gradient(90deg,var(--grad-start),var(--grad-end));
-  opacity:0;transition:opacity .25s;
-}
-.project:hover{
-  transform:translateY(-4px);
-  border-color:rgba(91,141,239,.4);
-  box-shadow:0 8px 32px rgba(0,0,0,.6),0 0 0 1px rgba(91,141,239,.15);
-}
-.project:hover::before{opacity:1}
-.project-top{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:6px}
-.project h3{font:700 18px/1.3 "Noto Sans KR",sans-serif;color:var(--ink)}
-.status{
-  font-size:12px;font-weight:500;padding:3px 10px;border-radius:99px;
-  background:rgba(91,141,239,.15);border:1px solid rgba(91,141,239,.3);
-  color:var(--accent);white-space:nowrap;flex-shrink:0;
-}
-.project .meta{color:var(--muted);font-size:14px;margin-bottom:12px}
-.project p{color:#BDC8DC;font-size:15px;line-height:1.7}
-.tags{display:flex;flex-wrap:wrap;gap:7px;margin-top:16px;list-style:none}
-.tags li{
-  font-size:12px;font-weight:500;padding:3px 11px;
-  border:1px solid var(--border);border-radius:99px;
-  color:var(--muted);
-  background:var(--surface2);
-  transition:border-color .2s,color .2s;
-}
-.project:hover .tags li{border-color:rgba(91,141,239,.3);color:var(--accent)}
+.info-item .value{font-size:14px;font-weight:500;color:var(--brown)}
 
 /* ── 소개 링크 ───────────────────────────────────────── */
-.about-links{margin-top:20px}
+.about-links{margin-top:18px}
 .about-link{
   display:inline-block;
-  padding:8px 22px;border-radius:99px;
+  padding:8px 20px;border-radius:99px;
   border:1px solid var(--border);
-  background:rgba(255,255,255,.04);
-  color:var(--ink);font-size:14px;font-weight:500;
-  transition:background .2s,border-color .2s,color .2s;
-  backdrop-filter:blur(6px);
+  background:var(--cream);
+  color:var(--brown);font-size:13px;font-weight:500;
+  transition:border-color .2s,background .2s;
 }
-.about-link:hover{
-  background:rgba(91,141,239,.18);
-  border-color:var(--accent);
-  color:var(--accent);
+.about-link:hover{border-color:var(--brown);background:var(--cream-dark);color:var(--brown)}
+
+/* ── 카드 그리드 (활동·역량 공통) ───────────────────── */
+.card-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:18px;
 }
 
-/* ── 역량 ────────────────────────────────────────────── */
-.skills-group{margin-bottom:28px}
+/* ── 활동 카드 ───────────────────────────────────────── */
+.project{
+  background:var(--white);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  padding:22px 24px;
+  box-shadow:var(--shadow);
+  transform:rotate(0.4deg);
+  transition:transform .25s,box-shadow .25s;
+  position:relative;overflow:hidden;
+}
+.project:nth-child(even){transform:rotate(-0.5deg)}
+.project:hover{transform:rotate(0deg) translateY(-3px);box-shadow:0 6px 20px rgba(75,46,31,.13)}
+.project::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:3px;
+  background:var(--brown);
+}
+.project-top{
+  display:flex;align-items:flex-start;
+  justify-content:space-between;gap:10px;margin-bottom:4px;
+}
+.project h3{font-size:16px;font-weight:700;color:var(--brown);line-height:1.3}
+.status{
+  font-size:11px;font-weight:600;padding:3px 10px;border-radius:99px;
+  background:var(--sky);border:1px solid var(--sky-dark);
+  color:var(--brown);white-space:nowrap;flex-shrink:0;
+}
+.project .meta{color:var(--muted);font-size:13px;margin-bottom:10px}
+.project p{color:var(--brown);font-size:14px;line-height:1.7}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px;list-style:none}
+.tags li{
+  font-size:11px;font-weight:500;padding:3px 10px;
+  border:1px solid var(--border);border-radius:99px;
+  color:var(--muted);background:var(--cream);
+}
+
+/* ── 역량 카드 ───────────────────────────────────────── */
+.skills-group{margin-bottom:32px}
 .skills-group:last-child{margin-bottom:0}
 .skills-group-label{
-  font-size:12px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;
-  color:var(--muted);margin-bottom:14px;
-}
-.skills-grid{
-  display:grid;grid-template-columns:repeat(2,1fr);gap:14px;
+  font-size:11px;font-weight:600;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--muted);margin-bottom:12px;
 }
 .skill-card{
-  background:var(--surface);
+  background:var(--white);
   border:1px solid var(--border);
   border-radius:var(--radius);
   padding:18px 20px;
   box-shadow:var(--shadow);
-  transition:transform .25s,border-color .25s,box-shadow .25s;
+  transform:rotate(-0.4deg);
+  transition:transform .25s,box-shadow .25s;
   position:relative;overflow:hidden;
 }
+.skill-card:nth-child(even){transform:rotate(0.6deg)}
+.skill-card:hover{transform:rotate(0deg) translateY(-3px);box-shadow:0 6px 20px rgba(75,46,31,.13)}
 .skill-card::before{
-  content:'';
-  position:absolute;top:0;left:0;right:0;height:3px;
-  background:linear-gradient(90deg,var(--grad-start),var(--grad-end));
-  opacity:0;transition:opacity .25s;
+  content:'';position:absolute;top:0;left:0;right:0;height:3px;
+  background:var(--sky-dark);
 }
-.skill-card:hover{
-  transform:translateY(-3px);
-  border-color:rgba(91,141,239,.4);
-  box-shadow:0 8px 28px rgba(0,0,0,.55),0 0 0 1px rgba(91,141,239,.15);
-}
-.skill-card:hover::before{opacity:1}
-.skill-card.growing{
-  border-color:rgba(167,139,250,.25);
-}
-.skill-card.growing::before{
-  background:linear-gradient(90deg,var(--accent2),#c084fc);
-}
-.skill-card.growing:hover{
-  border-color:rgba(167,139,250,.5);
-  box-shadow:0 8px 28px rgba(0,0,0,.55),0 0 0 1px rgba(167,139,250,.15);
-}
+.skill-card.growing::before{background:var(--brown);}
 .skill-name{
-  font:700 15px/1.3 "Noto Sans KR",sans-serif;
-  color:var(--ink);margin-bottom:7px;
+  font:700 14px/1.3 "Pretendard",sans-serif;
+  color:var(--brown);margin-bottom:7px;
   display:flex;align-items:center;gap:8px;
 }
 .skill-badge{
-  font-size:11px;font-weight:500;padding:2px 8px;border-radius:99px;
-  background:rgba(91,141,239,.15);border:1px solid rgba(91,141,239,.3);
-  color:var(--accent);
+  font-size:10px;font-weight:600;padding:2px 8px;border-radius:99px;
+  background:var(--sky);border:1px solid var(--sky-dark);
+  color:var(--brown);
 }
 .skill-card.growing .skill-badge{
-  background:rgba(167,139,250,.15);border-color:rgba(167,139,250,.3);
-  color:var(--accent2);
+  background:var(--cream-dark);border-color:var(--border);
+  color:var(--brown);
 }
-.skill-desc{
-  font-size:13px;color:#BDC8DC;line-height:1.65;
-}
+.skill-desc{font-size:13px;color:var(--brown);line-height:1.65}
+
+/* 역량 — 키워 나갈 역량 3열 */
 .skills-grid--3{grid-template-columns:repeat(3,1fr)}
-@media(max-width:600px){
-  .skills-grid{grid-template-columns:1fr}
-  .skills-grid--3{grid-template-columns:1fr}
+
+/* ── 포부 (갈색 배경 띠) ─────────────────────────────── */
+#goal{
+  background:var(--brown);
+  margin-left:calc(-50vw + 50%);
+  margin-right:calc(-50vw + 50%);
+  padding:60px calc(50vw - 50% + 24px);
+}
+#goal .section-head{border-bottom-color:var(--cream-dark)}
+#goal h2{color:var(--cream)}
+#goal .section-icon{color:var(--cream)}
+.goal-card{max-width:812px;margin:0 auto}
+.goal-card p{
+  color:var(--cream);line-height:1.9;font-size:16px;
+}
+.goal-card p+p{margin-top:14px}
+.goal-card mark{
+  background:rgba(207,227,245,.25);
+  color:var(--cream);border-radius:3px;padding:0 2px;
 }
 
-/* ── 포부 ────────────────────────────────────────────── */
-.goal-card{
-  background:linear-gradient(135deg,rgba(91,141,239,.08),rgba(167,139,250,.08));
-  border:1px solid rgba(91,141,239,.2);
+/* ── 방명록 (하늘색 줄무늬 배경) ────────────────────── */
+#guestbook{
+  margin-left:calc(-50vw + 50%);
+  margin-right:calc(-50vw + 50%);
+  padding:60px calc(50vw - 50% + 24px);
+  background-color:var(--sky);
+  background-image:repeating-linear-gradient(
+    90deg,
+    rgba(255,255,255,.55) 0px,
+    rgba(255,255,255,.55) 18px,
+    transparent 18px,
+    transparent 36px
+  );
+}
+#guestbook .section-head{border-bottom-color:var(--sky-dark)}
+#guestbook h2{color:var(--brown)}
+.guestbook-wrap{
+  max-width:812px;margin:0 auto;
+  background:var(--white);
+  border:1px solid var(--sky-dark);
   border-radius:var(--radius);
   padding:28px 32px;
-  box-shadow:var(--shadow);
-}
-.goal-card p{color:#BDC8DC;line-height:1.9;font-size:16px}
-.goal-card p + p{margin-top:14px}
-.goal-card mark{
-  background:linear-gradient(transparent 55%,rgba(255,233,138,.3) 55%);
-  color:inherit;
-}
-
-/* ── 방명록 ──────────────────────────────────────────── */
-.guestbook-form{
-  background:var(--surface);
-  border:1px solid var(--border);
-  border-radius:var(--radius);
-  padding:24px 28px;
-  margin-bottom:24px;
-  box-shadow:var(--shadow);
+  box-shadow:0 2px 16px rgba(75,46,31,.08);
 }
 .guestbook-form label{
-  display:block;font-size:13px;font-weight:500;
-  color:var(--muted);letter-spacing:.04em;text-transform:uppercase;
+  display:block;font-size:12px;font-weight:600;
+  color:var(--muted);letter-spacing:.05em;text-transform:uppercase;
   margin-bottom:6px;
 }
 .guestbook-form input,
 .guestbook-form textarea{
   width:100%;
-  background:var(--surface2);
+  background:var(--white);
   border:1px solid var(--border);
   border-radius:8px;
-  color:var(--ink);
-  font:400 15px/1.6 "Noto Sans KR",sans-serif;
+  color:var(--brown);
+  font:400 15px/1.6 "Pretendard",sans-serif;
   padding:10px 14px;
   outline:none;
   transition:border-color .2s;
   resize:none;
 }
 .guestbook-form input:focus,
-.guestbook-form textarea:focus{
-  border-color:var(--accent);
-}
+.guestbook-form textarea:focus{border-color:var(--brown)}
 .guestbook-form input.invalid,
-.guestbook-form textarea.invalid{
-  border-color:#f87171;
-}
+.guestbook-form textarea.invalid{border-color:#c0392b}
 .guestbook-form .field{margin-bottom:14px}
 .guestbook-form .counter{
   font-size:12px;color:var(--muted);
   text-align:right;margin-top:4px;
 }
 .guestbook-form .field-error{
-  font-size:13px;color:#f87171;margin-top:4px;
-  min-height:18px;
+  font-size:12px;color:#c0392b;margin-top:4px;min-height:18px;
 }
 .guestbook-form .submit-row{
-  display:flex;align-items:center;gap:12px;flex-wrap:wrap;
-  margin-top:4px;
+  display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:4px;
 }
 .btn-submit{
-  padding:9px 24px;border-radius:99px;border:none;cursor:pointer;
-  background:linear-gradient(90deg,var(--grad-start),var(--grad-end));
-  color:#fff;font:500 14px/1 "Noto Sans KR",sans-serif;
-  transition:opacity .2s;
+  padding:10px 26px;border-radius:99px;border:none;cursor:pointer;
+  background:var(--brown);color:var(--cream);
+  font:600 14px/1 "Pretendard",sans-serif;
+  transition:background .2s;
 }
-.btn-submit:disabled{opacity:.45;cursor:not-allowed}
-.form-status{font-size:13px;min-height:18px}
-.form-status.error{color:#f87171}
-.form-status.success{color:#4ade80}
+.btn-submit:hover{background:var(--brown-mid)}
+.btn-submit:disabled{opacity:.4;cursor:not-allowed}
+.form-status{font-size:13px;min-height:18px;color:var(--brown)}
+.form-status.error{color:#c0392b}
+.form-status.success{color:#27643a}
 
 .guestbook-list-head{
   display:flex;align-items:center;justify-content:space-between;
-  margin-bottom:16px;
+  margin:20px 0 12px;border-top:1px solid var(--border);padding-top:16px;
 }
-.guestbook-list-head .hint{
-  font-size:12px;color:var(--muted);
-}
+.guestbook-list-head .hint{font-size:12px;color:var(--muted)}
 .guestbook-empty,.guestbook-error{
-  text-align:center;color:var(--muted);
-  font-size:14px;padding:32px 0;
+  text-align:center;color:var(--muted);font-size:14px;padding:24px 0;
 }
 .msg-card{
-  background:var(--surface);
+  background:var(--cream);
   border:1px solid var(--border);
-  border-radius:var(--radius);
-  padding:18px 22px;
-  margin-bottom:12px;
-  box-shadow:var(--shadow);
+  border-radius:10px;
+  padding:14px 18px;margin-bottom:10px;
 }
 .msg-card-top{
   display:flex;align-items:baseline;
-  justify-content:space-between;gap:8px;
-  margin-bottom:6px;
+  justify-content:space-between;gap:8px;margin-bottom:4px;
 }
 .msg-card .nickname{
-  font:600 15px/1 "Noto Sans KR",sans-serif;
-  color:var(--accent);
-  word-break:break-all;
+  font:600 14px/1 "Pretendard",sans-serif;color:var(--brown);word-break:break-all;
 }
-.msg-card .time{
-  font-size:12px;color:var(--muted);white-space:nowrap;flex-shrink:0;
-}
-.msg-card .body{
-  font-size:14px;color:#BDC8DC;line-height:1.7;
-  word-break:break-all;
-}
+.msg-card .time{font-size:11px;color:var(--muted);white-space:nowrap;flex-shrink:0}
+.msg-card .body{font-size:13px;color:var(--brown);line-height:1.65;word-break:break-all}
 
 /* ── 푸터 ────────────────────────────────────────────── */
 footer{
-  text-align:center;padding:28px;
-  color:var(--muted);font-size:13px;
+  background:var(--cream);
   border-top:1px solid var(--border);
+  text-align:center;padding:24px;
+  color:var(--muted);font-size:13px;
 }
+footer a{color:var(--muted)}
+footer a:hover{color:var(--brown)}
 
-/* ── 반응형 ─────────────────────────────────────────── */
-@media(max-width:600px){
-  .hero-banner{padding:56px 24px 44px}
-  .hero-name{font-size:36px}
+/* ── 반응형 ──────────────────────────────────────────── */
+@media(max-width:680px){
+  .hero{padding:48px 20px 40px}
+  .hero-inner{flex-direction:column-reverse;align-items:flex-start;gap:24px}
+  .hero-name{font-size:38px}
+  .hero-avatar{width:88px;height:88px;font-size:38px}
+  .wrap{padding:48px 16px 72px}
+  .card-grid{grid-template-columns:1fr}
+  .skills-grid--3{grid-template-columns:1fr}
   .info-grid{grid-template-columns:1fr}
-  .wrap{padding:40px 16px 72px}
+  #goal{padding:48px 20px}
+  #guestbook{padding:48px 20px}
+  .guestbook-wrap{padding:20px}
 }
 @media(prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
-  .project{transition:none}
+  .project,.skill-card{transition:none;transform:none!important}
 }
 </style>
 </head>
 <body>
 
-<!-- 히어로 배너 -->
-<header class="hero-banner">
-  <div class="avatar">현</div>
-  <h1 class="hero-name">나현지</h1>
-  <p class="hero-role">국민대학교 경영정보학부 · 20262073</p>
-  <nav class="hero-nav" aria-label="섹션 이동">
-    <a href="#about">소개</a>
-    <a href="#projects">활동</a>
-    <a href="#skills">역량</a>
-    <a href="#goal">포부</a>
-    <a href="#guestbook">방명록</a>
-  </nav>
+<!-- 히어로 -->
+<header class="hero">
+  <div class="hero-inner">
+    <div class="hero-text">
+      <h1 class="hero-name">나현지</h1>
+      <p class="hero-role">국민대학교 경영정보학부 · 20262073<br>경영과 IT를 연결해 실제 문제를 해결하는 사람이 되고자 합니다.</p>
+      <nav class="hero-nav" aria-label="섹션 이동">
+        <a href="#projects" class="btn-primary">활동</a>
+        <a href="#guestbook" class="btn-primary">방명록</a>
+        <a href="#about" class="btn-ghost">소개</a>
+        <a href="#skills" class="btn-ghost">역량</a>
+        <a href="#goal" class="btn-ghost">목표</a>
+      </nav>
+    </div>
+    <div class="hero-avatar" aria-hidden="true">현</div>
+  </div>
 </header>
 
 <div class="wrap">
 
   <!-- 소개 -->
-  <section id="about">
+  <section id="about" style="margin-bottom:64px">
     <div class="section-head">
-      <div class="section-icon">👤</div>
+      <span class="section-icon">👤</span>
       <h2>소개</h2>
     </div>
     <div class="about-card">
@@ -431,33 +430,34 @@ footer{
   </section>
 
   <!-- 활동 -->
-  <section id="projects">
+  <section id="projects" style="margin-bottom:64px">
     <div class="section-head">
-      <div class="section-icon">🚀</div>
+      <span class="section-icon">🚀</span>
       <h2>활동</h2>
     </div>
-
-    <article class="project">
-      <div class="project-top">
-        <h3>개인 포트폴리오 웹페이지 제작</h3>
-        <span class="status">진행 중</span>
-      </div>
-      <p class="meta">개인 프로젝트</p>
-      <p>지금까지의 활동을 정리하기 위해 HTML로 포트폴리오 웹페이지를 만들고 있습니다. 직접 만들면서 웹페이지의 구성 방식을 익히고 있고, 앞으로 하는 활동을 이 페이지에 계속 추가해 갈 계획입니다.</p>
-      <ul class="tags"><li>HTML</li><li>CSS</li><li>포트폴리오</li><li>GitHub Pages</li></ul>
-    </article>
+    <div class="card-grid">
+      <article class="project">
+        <div class="project-top">
+          <h3>개인 포트폴리오 웹페이지 제작</h3>
+          <span class="status">진행 중</span>
+        </div>
+        <p class="meta">개인 프로젝트</p>
+        <p>지금까지의 활동을 정리하기 위해 HTML로 포트폴리오 웹페이지를 만들고 있습니다. 직접 만들면서 웹페이지의 구성 방식을 익히고 있고, 앞으로 하는 활동을 이 페이지에 계속 추가해 갈 계획입니다.</p>
+        <ul class="tags"><li>HTML</li><li>CSS</li><li>포트폴리오</li><li>GitHub Pages</li></ul>
+      </article>
+    </div>
   </section>
 
   <!-- 역량 -->
-  <section id="skills">
+  <section id="skills" style="margin-bottom:64px">
     <div class="section-head">
-      <div class="section-icon">💡</div>
+      <span class="section-icon">💡</span>
       <h2>역량</h2>
     </div>
 
     <div class="skills-group">
       <p class="skills-group-label">보유 역량</p>
-      <div class="skills-grid">
+      <div class="card-grid">
         <div class="skill-card">
           <div class="skill-name">컴퓨터활용능력 <span class="skill-badge">보유</span></div>
           <p class="skill-desc">컴퓨터활용능력 자격증을 취득했으며, 엑셀로 데이터를 정리하고 함수를 활용해 문서를 작성할 수 있습니다.</p>
@@ -479,7 +479,7 @@ footer{
 
     <div class="skills-group">
       <p class="skills-group-label">키워 나갈 역량</p>
-      <div class="skills-grid skills-grid--3">
+      <div class="card-grid skills-grid--3">
         <div class="skill-card growing">
           <div class="skill-name">자바스크립트 <span class="skill-badge">성장 중</span></div>
           <p class="skill-desc">사용자 입력에 반응하는 기능(방명록 입력 검증, 버튼 동작 등)을 구현하는 것을 목표로 기초부터 학습하고 있습니다.</p>
@@ -496,25 +496,27 @@ footer{
     </div>
   </section>
 
-  <!-- 포부 -->
-  <section id="goal">
-    <div class="section-head">
-      <div class="section-icon">✨</div>
-      <h2>포부</h2>
-    </div>
-    <div class="goal-card">
-      <p>경영과 정보기술을 함께 공부하는 만큼, <mark>두 분야를 연결해 실제 문제를 해결할 수 있는 사람</mark>이 되고 싶습니다.</p>
-      <p>배운 내용을 꾸준히 기록하고 정리하는 습관을 길러, 이 포트폴리오를 학기마다 채워 가며 <mark>성장 과정을 보여 주려고</mark> 합니다.</p>
-    </div>
-  </section>
+</div><!-- /.wrap -->
 
-  <!-- 방명록 -->
-  <section id="guestbook">
-    <div class="section-head">
-      <div class="section-icon">💌</div>
-      <h2>방명록</h2>
-    </div>
+<!-- 목표 (풀너비 갈색 배경 띠) -->
+<section id="goal">
+  <div class="section-head" style="max-width:812px;margin:0 auto 20px">
+    <span class="section-icon">✨</span>
+    <h2>목표</h2>
+  </div>
+  <div class="goal-card">
+    <p>경영과 정보기술을 함께 공부하는 만큼, <mark>두 분야를 연결해 실제 문제를 해결할 수 있는 사람</mark>이 되고 싶습니다.</p>
+    <p>배운 내용을 꾸준히 기록하고 정리하는 습관을 길러, 이 포트폴리오를 학기마다 채워 가며 <mark>성장 과정을 보여 주려고</mark> 합니다.</p>
+  </div>
+</section>
 
+<!-- 방명록 (하늘색 줄무늬 배경) -->
+<section id="guestbook">
+  <div class="section-head" style="max-width:812px;margin:0 auto 20px">
+    <span class="section-icon">💌</span>
+    <h2>방명록</h2>
+  </div>
+  <div class="guestbook-wrap">
     <!-- 입력 폼 -->
     <div class="guestbook-form">
       <div class="field">
@@ -552,12 +554,11 @@ footer{
     <div id="gb-list">
       <p class="guestbook-empty">불러오는 중...</p>
     </div>
-  </section>
-
-</div>
+  </div>
+</section>
 
 <footer>
-  © 2026 나현지 · <a href="mailto:hyunji142@kookmin.ac.kr">hyunji142@kookmin.ac.kr</a>
+  © 2026 나현지
 </footer>
 
 <script>
