@@ -81,15 +81,33 @@ h2{font-size:22px;line-height:1.3}
 }
 .hero-nav .btn-ghost:hover{border-color:var(--brown);background:var(--cream-dark)}
 
-/* 프로필 아이콘 */
-.hero-avatar{
+/* 프로필 래퍼 */
+.profile-wrap{
   flex-shrink:0;
-  width:120px;height:120px;border-radius:50%;
-  background:var(--sky);
+  position:relative;
+  padding-top:60px; /* 햄스터가 위로 잘리지 않도록 */
+}
+
+/* 아바타 원 */
+.avatar-circle{
+  width:140px;height:140px;
+  min-width:140px;min-height:140px; /* 모바일 찌그러짐 방지 */
+  border-radius:50%;
+  background:linear-gradient(135deg,#FDEBF3 0%,#FFF4E0 100%);
   display:flex;align-items:center;justify-content:center;
-  font-size:52px;font-weight:700;color:var(--brown);
-  border:3px solid var(--sky-dark);
+  font-size:40px;font-weight:700;color:#4A3430;
   user-select:none;
+  box-sizing:border-box;
+}
+
+/* 햄스터: 원 위에 올라앉은 한 마리 */
+.profile-wrap .hamster-top{
+  position:absolute;
+  width:80px;
+  left:50%;
+  transform:translateX(-50%);
+  top:-8px; /* padding-top(60px) - 이미지 높이(80px) + 겹침(12px) */
+  pointer-events:none;
 }
 
 /* ── 레이아웃 ────────────────────────────────────────── */
@@ -358,7 +376,8 @@ footer a:hover{color:var(--brown)}
   .hero{padding:48px 20px 40px}
   .hero-inner{flex-direction:column-reverse;align-items:flex-start;gap:24px}
   .hero-name{font-size:38px}
-  .hero-avatar{width:88px;height:88px;font-size:38px}
+  .avatar-circle{width:100px;height:100px;min-width:100px;min-height:100px;font-size:30px}
+  .profile-wrap{padding-top:48px}
   .wrap{padding:48px 16px 72px}
   .card-grid{grid-template-columns:1fr}
   .skills-grid--3{grid-template-columns:1fr}
@@ -389,7 +408,10 @@ footer a:hover{color:var(--brown)}
         <a href="#guestbook" class="btn-ghost">방명록</a>
       </nav>
     </div>
-    <div class="hero-avatar" aria-hidden="true">현</div>
+    <div class="profile-wrap">
+      <img src="hamster.svg" alt="" class="hamster-top">
+      <div class="avatar-circle" aria-hidden="true">현지</div>
+    </div>
   </div>
 </header>
 
