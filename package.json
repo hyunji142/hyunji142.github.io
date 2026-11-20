@@ -4,7 +4,7 @@
   "private": true,
   "description": "나현지 포트폴리오 홈페이지 — Netlify Functions 의존성 관리용",
   "scripts": {
-    "build": "node -e \"const fs=require('fs');fs.mkdirSync('public',{recursive:true});fs.copyFileSync('index.html','public/index.html');\""
+    "build": "node -e \"const fs=require('fs');fs.mkdirSync('public',{recursive:true});fs.copyFileSync('index.html','public/index.html');fs.copyFileSync('hamster.svg','public/hamster.svg');\""
   },
   "dependencies": {
     "@supabase/supabase-js": "2.45.4"

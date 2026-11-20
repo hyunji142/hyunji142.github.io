@@ -3,7 +3,7 @@
 # index.html 원본은 루트에 유지 → GitHub Pages도 그대로 동작
 
 [build]
-  command = "node -e \"const fs=require('fs');fs.mkdirSync('public',{recursive:true});fs.copyFileSync('index.html','public/index.html');\""
+  command = "node -e \"const fs=require('fs');fs.mkdirSync('public',{recursive:true});fs.copyFileSync('index.html','public/index.html');fs.copyFileSync('hamster.svg','public/hamster.svg');\""
   publish = "public"
   functions = "netlify/functions"
 
